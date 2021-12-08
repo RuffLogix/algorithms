@@ -14,18 +14,17 @@ void tarjanSCC(int u){
     visited[u] = true;
     S.push_back(u);
     for(auto v : adj[u]){
-        if(!visited[v]){
+        if(!disc[v])
             tarjanSCC(v);
-        }
-        if(visited[v]){
+        if(visited[v])
             low[u] = min(low[u] , low[v]);
-        }
+        
     }
 
     if(disc[u] == low[u]){
         cout << "SCC : ";
         while(true){
-            int v = S.back() ; S.pop_back();
+            int v = S.back() ; S.pop_back(); visited[v] = false;
             cout << v << " ";
             if(u==v)break;
         }
